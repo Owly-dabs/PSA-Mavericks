@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import CoursesPage from './components/CoursesPage';
+import NavBar from './components/Navbar.jsx'
 import EngagementPage from './components/EngagementPage';
 import CareerPage from './components/CareerPage';
 import PerformancePage from './components/PerformancePage';
@@ -12,22 +13,26 @@ function App() {
 
   // Initialize isAuthenticated from localStorage
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('isAuthenticated') === 'true';
+    return sessionStorage.getItem('isAuthenticated') === 'true';
   });
 
   // Update localStorage whenever isAuthenticated changes
   useEffect(() => {
-    localStorage.setItem('isAuthenticated', isAuthenticated);
+    sessionStorage.setItem('isAuthenticated', isAuthenticated);
   }, [isAuthenticated]);
-  
+
   const handleLogin = () => {
-  
     setIsAuthenticated(true);  // Set authenticated to true
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);  // Set authenticated to false
+    sessionStorage.removeItem('isAuthenticated');  // Remove authentication from sessionStorage
   };
 
   return (
     <>
-    {console.log(isAuthenticated)}
+    {isAuthenticated && <NavBar onLogout={handleLogout} />}
     <Router>
       <Routes>
         

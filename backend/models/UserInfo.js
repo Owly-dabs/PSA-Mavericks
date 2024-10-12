@@ -1,9 +1,8 @@
 const mongoose = require('mongoose'); 
 
 const userInfoSchema = new Schema({
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Referencing the User model
+    email: {
+      type: String,
       required: true,
     },
     signedUpActivities: [{
