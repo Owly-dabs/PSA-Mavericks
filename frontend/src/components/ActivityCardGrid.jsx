@@ -25,6 +25,8 @@ export default function ActivityGrid({activities}) {
               creator={activity.creator}
               date={activity.date}
               time={activity.time}
+              id={activity._id}
+
           />
         </Grid>
       ))}

@@ -7,7 +7,7 @@ import CoursesPage from './components/CoursesPage';
 import EngagementPage from './components/EngagementPage';
 import CareerPage from './components/CareerPage';
 import PerformancePage from './components/PerformancePage';
-
+import IndividualActivity from './components/IndividualActivity';
 function App() {
 
   // Initialize isAuthenticated from localStorage
@@ -37,7 +37,7 @@ function App() {
         <Route path="/engagement" element={isAuthenticated ? <EngagementPage /> : <Navigate to="/" />} />
         <Route path="/career" element={isAuthenticated ? <CareerPage /> : <Navigate to="/" />} />
         <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />
-
+        <Route path="/engagement/:id" element={isAuthenticated ? <IndividualActivity /> : <Navigate to="/" />} />
       </Routes>
     </Router>
     </>

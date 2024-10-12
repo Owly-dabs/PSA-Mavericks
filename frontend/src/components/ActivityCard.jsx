@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,8 +11,12 @@ import UserIcon from '../assets/user.png';
 import ClockIcon from '../assets/clock.png'; 
 import CalendarIcon from '../assets/calendar.png'; 
 
-export default function MediaCard({title, creator, date, time}) {
+export default function MediaCard({title, creator, date, time, id}) {
+  const navigate = useNavigate(); // Use the hook to navigate
 
+  const handleReadMore = () => {
+    navigate(`/engagement/${id}`); // Navigate to the individual activity page
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -46,7 +51,7 @@ export default function MediaCard({title, creator, date, time}) {
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={handleReadMore}>Learn More</Button>
       </CardActions>
     </Card>
   );
