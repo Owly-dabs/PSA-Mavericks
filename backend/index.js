@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose'); 
 const nodemon = require('nodemon');
 const cors = require('cors'); // Import cors
-const UserModel = require('./models/User')
+const UserModel = require('./models/User');
+const User = require('./models/User');
 
 const app = express(); 
 app.use(express.json());
@@ -20,31 +21,32 @@ mongoose.connect("mongodb+srv://root:PSApassword@psa-db.2csz1.mongodb.net/PSA-DB
     console.log("Connection failed")
 });
 
-app.post('/register', (req, res) => { 
+app.post('/register', async (req, res) => { 
     const {name, email, password} = req.body;
 
     try { 
-        const existingUser = User.findOne({ email }); 
+        const existingUser = await User.findOne({ email }); 
         if (existingUser) {
+            console.log(existingUser)
             return res.status(400).json({ message: 'User already exists' });
         }
 
         const newUser = new User({ name, email, password });
-        newUser.save();
+        await newUser.save();
         res.status(201).json({ message: 'User created successfully' });
 
     } catch (error) { 
-        res.status(500).json({ error: 'Error creating user' });
+        res.status(500).json({ error: error });
     }
     
 }); 
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const {email, password} = req.body; 
 
     try {
         // Check if the user exists
-        const user = User.findOne({ email });
+        const user = await User.findOne({ email });
         if (!user || user.password !== password) {
           return res.status(400).json({ message: 'Invalid credentials' });
         }
