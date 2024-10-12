@@ -5,10 +5,9 @@ import Navbar from './Navbar.jsx'
 
 function CoursesPage() {
     return (
-      <div>
-        <Navbar/>
-      </div>
-  
+      <>
+      <Typography> Courses </Typography>
+      </>
     );
   }
   

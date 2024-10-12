@@ -7,8 +7,6 @@ import EngagementPage from './EngagementPage.jsx'
 function HomePage() {
   return (
     <div>
-      <Navbar/>
-    
       <Box style={{ mt: 8, mx: 'auto', maxWidth: 600 }}>
 
         <Typography variant="h4" component="h1" gutterBottom>
