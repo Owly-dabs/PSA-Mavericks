@@ -28,6 +28,10 @@ function LoginPage({ onLogin }) {
 
       const data = await response.json();
 
+      
+      console.log(data);
+      
+
       onLogin();
 
       // Assuming the response contains a token

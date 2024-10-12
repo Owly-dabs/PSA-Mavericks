@@ -2,6 +2,7 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import Navbar from './Navbar.jsx'
+import EngagementPage from './EngagementPage.jsx' 
 
 function HomePage() {
   return (
@@ -17,6 +18,7 @@ function HomePage() {
           This is a simple home page created with Material UI.
         </Typography>
       </Box>
+      <EngagementPage/>
     </div>
 
   );
