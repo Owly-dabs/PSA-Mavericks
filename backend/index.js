@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose'); 
 const nodemon = require('nodemon');
+const UserModel = require('./models/User')
 
 const app = express(); 
 
