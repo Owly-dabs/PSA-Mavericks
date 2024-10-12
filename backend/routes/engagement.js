@@ -27,5 +27,19 @@ router.get('/getAllActivities', async (req, res) => {
     }
 });
 
+// GET: Retrieve activity by ID
+router.get('/getActivity/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const activity = await Activity.findById(id);
+      if (!activity) {
+        return res.status(404).json({ message: 'Activity not found' });
+      }
+      res.status(200).json(activity);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching activity' });
+    }
+});
+
 
 module.exports = router;
