@@ -2,9 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose'); 
 const nodemon = require('nodemon');
 const cors = require('cors'); 
-const User = require('./models/User');
 const dotenv = require('dotenv').config(); 
-const router = require('./routes/auth');
+const authRouter = require('./routes/auth');
+const engageRouter = require('./routes/engagement');
 
 const app = express(); 
 app.use(express.json());
@@ -22,4 +22,5 @@ mongoose.connect(process.env.MONGO_URI)
     console.log("Connection failed")
 });
 
-app.use('/api/auth', router);
+app.use('/api/auth', authRouter);
+app.use('/api/engagement', engageRouter); 
