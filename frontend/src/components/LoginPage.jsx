@@ -6,10 +6,35 @@ function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you can add authentication logic
-    onLogin();
+
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error(response.body);
+      }
+
+      const data = await response.json();
+
+      // Assuming the response contains a token
+      if (data.token) {
+        // Store the token (e.g., in localStorage or state)
+        localStorage.setItem('token', data.token);
+
+        // Call the onLogin function to update the app state
+        onLogin();
+      }
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
   };
 
   return (

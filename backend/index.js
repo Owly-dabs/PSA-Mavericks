@@ -1,10 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose'); 
 const nodemon = require('nodemon');
+const cors = require('cors'); // Import cors
 const UserModel = require('./models/User')
 
 const app = express(); 
 app.use(express.json());
+app.use(cors());
+app.options('*',cors());
 
 mongoose.connect("mongodb+srv://root:PSApassword@psa-db.2csz1.mongodb.net/PSA-DB?retryWrites=true&w=majority&appName=PSA-DB")
 .then(() => {
