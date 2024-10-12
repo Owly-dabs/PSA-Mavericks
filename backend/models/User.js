@@ -14,7 +14,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    }, 
+    signedUpActivities: [{ // Array of activity ObjectIds
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Activity' 
+    }] 
 });
 
 const User = mongoose.model("User", userSchema);
