@@ -13,7 +13,11 @@ router.post('/register', async (req, res) => {
         }
 
         const newUser = new User({name, email, password});
+        const newUserInfo = new UserInfo({ user: newUser._id, signedUpActivities: [] });
+        await newUserInfo.save();
+        newUser.userInfo = newUserInfo._id;
         await newUser.save();
+
         res.status(201).json({ message: 'User created successfully' });
 
     } catch (error) { 
