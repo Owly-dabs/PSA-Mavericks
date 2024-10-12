@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
 import backgroundImage from '../assets/background.jpg'; 
 import PSALogo from '../assets/PSALogo.png'; 
+import Snackbar from '@mui/material/Snackbar';
+
 
 function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -25,6 +27,7 @@ function LoginPage({ onLogin }) {
       }
 
       const data = await response.json();
+      
       onLogin();
 
       // Assuming the response contains a token
