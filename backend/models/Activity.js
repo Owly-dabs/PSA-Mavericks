@@ -33,6 +33,10 @@ const activitySchema = new mongoose.Schema({
     type: String, 
     required: true,
   },
+  signedUpUsers: [{ // Array of user ObjectIds
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User', 
+  }] 
 }, { timestamps: true });
 
 // Create the Activity model
