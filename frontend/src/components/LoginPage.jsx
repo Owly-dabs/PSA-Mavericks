@@ -23,15 +23,15 @@ function LoginPage({ onLogin }) {
       }
 
       const data = await response.json();
+      onLogin();
 
       // Assuming the response contains a token
-      if (data.token) {
-        // Store the token (e.g., in localStorage or state)
-        localStorage.setItem('token', data.token);
+      // if (data.token) {
+      //   // Store the token (e.g., in localStorage or state)
+      //   localStorage.setItem('token', data.token);
 
         // Call the onLogin function to update the app state
-        onLogin();
-      }
+      // }
     } catch (error) {
       console.error('There was an error!', error);
     }
