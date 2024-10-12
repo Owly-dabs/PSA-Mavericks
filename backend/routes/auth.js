@@ -12,8 +12,12 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        const newUser = new User({ name, email, password, signedUpActivities: []});
+        
+        const newUserInfo = new UserInfo({ email, signedUpActivities: [] }); //since email is unique 
+        await newUserInfo.save();
+        const newUser = new User({name, email, password, userInfoId: userInfo._id });
         await newUser.save();
+
         res.status(201).json({ message: 'User created successfully' });
 
     } catch (error) { 

@@ -17,7 +17,7 @@ import HomeIcon from '../assets/cruise.png';
 
 const pages = [
   { name: 'Courses', link: '/courses' },
-  { name: 'Career', link: '/pricing' },
+  { name: 'Career', link: '/career' },
   { name: 'Engagement', link: '/engagement' },
   { name: 'Performance', link: '/performance' }
 ];

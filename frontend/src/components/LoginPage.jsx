@@ -1,7 +1,7 @@
 // src/components/LoginPage.js
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Box } from '@mui/material';
-import backgroundImage from '../assets/background.jpg'; 
+import backgroundImage from '../assets/background.png'; 
 import PSALogo from '../assets/PSALogo.png'; 
 import Snackbar from '@mui/material/Snackbar';
 
@@ -66,7 +66,7 @@ function LoginPage({ onLogin }) {
           style={{
             display: 'block',
             margin: '0 auto',
-            maxWidth: '10em',
+            maxWidth: '15em',
             height: 'auto',
             justifyItems:'left',
           }}
