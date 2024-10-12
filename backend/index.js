@@ -15,3 +15,12 @@ mongoose.connect("mongodb+srv://root:PSApassword@psa-db.2csz1.mongodb.net/PSA-DB
 .catch(() => {
     console.log("Connection failed")
 });
+
+app.post('/register', (req, res) => { 
+    UserModel.create(req.body)
+    .then(() => {
+        user => res.json(user);
+        console.log("user registered");
+    })
+    .catch(err => res.json(err))
+}); 
