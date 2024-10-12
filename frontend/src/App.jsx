@@ -6,15 +6,25 @@ import HomePage from './components/HomePage';
 import CoursesPage from './components/CoursesPage';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Initialize isAuthenticated from localStorage
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
 
+  // Update localStorage whenever isAuthenticated changes
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', isAuthenticated);
+  }, [isAuthenticated]);
+  
   const handleLogin = () => {
   
     setIsAuthenticated(true);  // Set authenticated to true
   };
 
   return (
+    <>
+    {console.log(isAuthenticated)}
     <Router>
       <Routes>
         
@@ -24,6 +34,7 @@ function App() {
         
       </Routes>
     </Router>
+    </>
   );
 }
 
