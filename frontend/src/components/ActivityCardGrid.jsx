@@ -2,9 +2,9 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import ActivityCard from './ActivityCard.jsx';  // Import your existing MediaCard component
 
-export default function ActivityGrid() {
+export default function ActivityGrid({activities}) {
   // Sample data for the cards (You can replace this with dynamic data)
-  const activities = [
+  const activitiesO = [
     { id: 1, title: "Activity 1", user: "User 1", date: "2024-10-12", time: "10:00 AM" },
     { id: 2, title: "Activity 2", user: "User 2", date: "2024-10-13", time: "12:00 PM" },
     { id: 3, title: "Activity 3", user: "User 3", date: "2024-10-14", time: "02:00 PM" },
@@ -21,6 +21,10 @@ export default function ActivityGrid() {
       {activities.map((activity) => (
         <Grid item xs={12} sm={6} md={3} key={activity.id}>
           <ActivityCard 
+              title={activity.title}
+              creator={activity.creator}
+              date={activity.date}
+              time={activity.time}
           />
         </Grid>
       ))}
