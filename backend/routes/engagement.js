@@ -53,4 +53,16 @@ router.get('/getActivityByCat/:categoryName', async (req, res) => {
   });
 
 
+// GET: Retrieve activities created by a specific user
+router.get('/getActivityByUser/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+      const activities = await Activity.find({ creator: userId });
+      res.status(200).json(activities);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching activities by user' });
+    }
+});
+
+
 module.exports = router;
