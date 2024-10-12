@@ -38,7 +38,6 @@ function EngagementPage() {
 
   return (
     <div>
-      <Navbar />
       <div style={{ padding: '2em' }}>
         <h1>ENGAGEMENT</h1>
         <p>Take a break, do an activity!</p>

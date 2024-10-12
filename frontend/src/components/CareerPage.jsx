@@ -6,7 +6,6 @@ import Navbar from './Navbar.jsx'
 function CareerPage() {
     return (
       <div>
-        <Navbar/>
       </div>
   
     );

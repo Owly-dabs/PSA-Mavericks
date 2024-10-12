@@ -6,7 +6,6 @@ import Navbar from './Navbar.jsx'
 function PerformancePage() {
     return (
       <div>
-        <Navbar/>
       </div>
   
     );
