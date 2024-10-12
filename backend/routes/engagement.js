@@ -7,7 +7,7 @@ router.post('/createActivity', async (req, res) => {
     const { title, details, image, date, time, vacancies, creator, category } = req.body;
   
     try {
-      const newActivity = new Activity({ title, details, image, date, time, vacancies, creator, category});
+      const newActivity = new Activity({ title, details, image, date, time, vacancies, creator, category, signedUpUsers: []});
       await newActivity.save();
       res.status(201).json({ message: 'Activity created successfully', activity: newActivity });
 
