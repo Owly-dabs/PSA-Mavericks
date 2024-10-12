@@ -27,7 +27,7 @@ router.get('/getAllActivities', async (req, res) => {
     }
 });
 
-// GET: Retrieve activity by ID
+// retrieve an activity by ID
 router.get('/getActivity/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -40,6 +40,17 @@ router.get('/getActivity/:id', async (req, res) => {
       res.status(500).json({ error: 'Error fetching activity' });
     }
 });
+
+// retrieve activities by category
+router.get('/getActivityByCat/:categoryName', async (req, res) => {
+    const { categoryName } = req.params;
+    try {
+      const activities = await Activity.find({ category: categoryName});
+      res.status(200).json(activities);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching activities by category' });
+    }
+  });
 
 
 module.exports = router;
