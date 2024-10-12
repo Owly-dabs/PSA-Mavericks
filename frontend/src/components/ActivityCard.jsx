@@ -10,7 +10,7 @@ import UserIcon from '../assets/user.png';
 import ClockIcon from '../assets/clock.png'; 
 import CalendarIcon from '../assets/calendar.png'; 
 
-export default function MediaCard() {
+export default function MediaCard({title, creator, date, time}) {
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -21,17 +21,10 @@ export default function MediaCard() {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Activity Title
+          {title}
         </Typography>
         <Box display="flex" alignItems="center">
-            <img src={UserIcon} style={{
-                display: 'flex', 
-                marginRight: '6px', 
-                width:'0.9em'
-            }}></img>
-          <Typography variant="body2" sx={{ color: 'text.secondary', mr: 2 }}>
-            User
-          </Typography>
+            
 
           <img src={CalendarIcon} style={{
                 display: 'flex', 
@@ -39,7 +32,7 @@ export default function MediaCard() {
                 width:'0.9em'
             }}></img>
           <Typography variant="body2" sx={{ color: 'text.secondary', mr: 2  }}>
-            Activity Date
+            {date}
           </Typography>
 
           <img src={ClockIcon} style={{
@@ -48,12 +41,11 @@ export default function MediaCard() {
                 width:'0.9em'
             }}></img>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Activity Time
+            {time}
           </Typography>
         </Box>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
       </CardActions>
     </Card>
