@@ -4,13 +4,14 @@ const nodemon = require('nodemon');
 const cors = require('cors'); // Import cors
 const UserModel = require('./models/User');
 const User = require('./models/User');
+const dotenv = require('dotenv').config(); 
 
 const app = express(); 
 app.use(express.json());
 app.use(cors());
 app.options('*',cors());
 
-mongoose.connect("mongodb+srv://root:PSApassword@psa-db.2csz1.mongodb.net/PSA-DB?retryWrites=true&w=majority&appName=PSA-DB")
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("Connected to database");
     app.listen(3000, () => { 
