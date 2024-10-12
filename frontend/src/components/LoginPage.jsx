@@ -66,9 +66,9 @@ function LoginPage({ onLogin }) {
             height: 'auto',
             justifyItems:'left',
           }}
-      ></img>
+      ></img> 
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 8, mx: 'auto', maxWidth: 400, backgroundColor: 'rgba(255, 255, 255, 0.7)', padding: '2em', borderRadius: '20px'}}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, mx: 'auto', maxWidth: 400, backgroundColor: 'rgba(255, 255, 255, 0.7)', padding: '2em', borderRadius: '20px'}}>
 
           <Typography variant="h4" component="h1" gutterBottom>
             Log in ✨
