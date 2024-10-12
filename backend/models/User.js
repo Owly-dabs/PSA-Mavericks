@@ -1,4 +1,6 @@
 const mongoose = require('mongoose'); 
+const Schema = mongoose.Schema;
+
 
 const userSchema = new mongoose.Schema({ 
     name: {
@@ -15,10 +17,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     }, 
-    signedUpActivities: [{ // Array of activity ObjectIds
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Activity' 
-    }] 
+    userInfo: { // Reference to UserInfo
+        type: Schema.Types.ObjectId, 
+        ref: 'UserInfo' 
+    } 
 });
 
 const User = mongoose.model("User", userSchema);
