@@ -16,9 +16,11 @@ import HomeIcon from '../assets/cruise.png';
 
 
 const pages = [
-  { name: 'Products', link: '/products' },
-  { name: 'Pricing', link: '/pricing' },
-  { name: 'Blog', link: '/blog' }
+  { name: 'Courses', link: '/courses' },
+  { name: 'Career', link: '/pricing' },
+  { name: 'Engagement', link: '/engagement' },
+  { name: 'Performance', link: '/performance' }
+
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -57,7 +59,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -109,7 +111,8 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          
+{/*           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -127,7 +130,7 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
+          </Typography> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
