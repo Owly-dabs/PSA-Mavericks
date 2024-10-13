@@ -1,16 +1,15 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 import CoursesPage from './components/CoursesPage';
-import NavBar from './components/Navbar.jsx'
+import NavBar from './components/Navbar.jsx';
 import EngagementPage from './components/EngagementPage';
 import CareerPage from './components/CareerPage';
 import PerformancePage from './components/PerformancePage';
 import IndividualActivity from './components/IndividualActivity';
-function App() {
 
+function App() {
   // Initialize isAuthenticated from localStorage
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return sessionStorage.getItem('isAuthenticated') === 'true';
@@ -32,19 +31,20 @@ function App() {
 
   return (
     <>
-    {isAuthenticated && <NavBar onLogout={handleLogout} />}
-    <Router>
-      <Routes>
-        
-        <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/home" />} />
-        <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/" />} />
-        <Route path="/courses" element={isAuthenticated ? <CoursesPage /> : <Navigate to="/" />} />
-        <Route path="/engagement" element={isAuthenticated ? <EngagementPage /> : <Navigate to="/" />} />
-        <Route path="/career" element={isAuthenticated ? <CareerPage /> : <Navigate to="/" />} />
-        <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />
-        <Route path="/engagement/:id" element={isAuthenticated ? <IndividualActivity /> : <Navigate to="/" />} />
-      </Routes>
-    </Router>
+      {isAuthenticated && <NavBar onLogout={handleLogout} />}
+      <Router>
+        <div style={{ backgroundColor: isAuthenticated ? '#eff6ff' : 'white', minHeight: '100vh' }}>
+          <Routes>
+            <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/home" />} />
+            <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/" />} />
+            <Route path="/courses" element={isAuthenticated ? <CoursesPage /> : <Navigate to="/" />} />
+            <Route path="/engagement" element={isAuthenticated ? <EngagementPage /> : <Navigate to="/" />} />
+            <Route path="/career" element={isAuthenticated ? <CareerPage /> : <Navigate to="/" />} />
+            <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />
+            <Route path="/engagement/:id" element={isAuthenticated ? <IndividualActivity /> : <Navigate to="/" />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }

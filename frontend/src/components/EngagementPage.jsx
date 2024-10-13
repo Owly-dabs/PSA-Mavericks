@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar.jsx';
 import EngagementSidebar from './EngagementSidebar.jsx';
 import ActivityCardGrid from './ActivityCardGrid.jsx';
-import { Button, TextField, InputAdornment } from '@mui/material'; // Import InputAdornment and Icon for the search icon
+import { Button, TextField, InputAdornment, Typography } from '@mui/material'; // Import InputAdornment and Icon for the search icon
 import SearchIcon from '@mui/icons-material/Search'; // Import the SearchIcon
 import AddActivityModal from './AddActivityModal.jsx'; // Import the modal component
 
@@ -61,8 +61,8 @@ function EngagementPage() {
   return (
     <div>
       <div style={{ padding: '2em' }}>
-        <h1>ENGAGEMENT</h1>
-        <p>Take a break, do an activity!</p>
+        <Typography variant='h2' sx={{display:'flex',padding:'5px', fontWeight:'semi-bold', }}>ENGAGEMENT 🧘🏻‍♀️</Typography>
+        <Typography variant='h5' sx={{display:'flex', padding:'5px',paddingBottom:'10px'}}>Take a break, do an activity!</Typography>
 
         {/* Flexbox container for the sidebar and main content */}
         <div style={{ display: 'flex', gap: '2em' }}>
@@ -72,7 +72,7 @@ function EngagementPage() {
           </div>
 
           {/* Main content section (Right section with search bar and button) */}
-          <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', backgroundColor:'rgba(255, 255, 255, 0.7)', padding: '1em', borderRadius:'20px' }}>
             {/* Search bar and add activity button */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1em' }}>
               {/* Search bar */}

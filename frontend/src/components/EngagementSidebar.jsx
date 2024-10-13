@@ -17,7 +17,7 @@ export default function GroupOrientation({ onCategoryChange, selectedCategory })
       }}
     >
       {/* ButtonGroup with dynamic buttons for categories */}
-      <ButtonGroup orientation="vertical" aria-label="Vertical button group" style={{ width: '20em' }}>
+      <ButtonGroup orientation="vertical" aria-label="Vertical button group" style={{ width: '12em',backgroundColor:'rgba(255, 255, 255, 0.7)' }}>
         {categories.map((category) => (
           <Button
             key={category}
