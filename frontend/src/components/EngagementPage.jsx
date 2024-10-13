@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar.jsx';
 import EngagementSidebar from './EngagementSidebar.jsx';
 import ActivityCardGrid from './ActivityCardGrid.jsx';
+import { Button } from '@mui/material';
+import AddActivityModal from './AddActivityModal.jsx'; // Import the modal component
 
 function EngagementPage() {
   const [activities, setActivities] = useState([]);
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All'); // Default to 'All' or your desired default category
+  const [open, setOpen] = useState(false); // State to control modal visibility
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -36,12 +39,16 @@ function EngagementPage() {
     }
   };
 
+  // Functions to open and close the modal
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div>
       <div style={{ padding: '2em' }}>
         <h1>ENGAGEMENT</h1>
         <p>Take a break, do an activity!</p>
-        
+
         {/* Flexbox container for the sidebar and activity grid */}
         <div style={{ display: 'flex', gap: '2em' }}>
           {/* Sidebar on the left */}
@@ -51,10 +58,22 @@ function EngagementPage() {
 
           {/* Activity grid on the right */}
           <div style={{ flex: '1' }}>
+            {/* Right-aligned button */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1em' }}>
+              <Button 
+                sx={{ alignItems: "right", border: '1px solid #1876d2' }} 
+                onClick={handleOpen}
+              >
+                + ADD NEW ACTIVITY
+              </Button>
+            </div>
             <ActivityCardGrid activities={filteredActivities} />
           </div>
         </div>
       </div>
+
+      {/* Render the AddActivityModal component */}
+      <AddActivityModal open={open} handleClose={handleClose} />
     </div>
   );
 }
