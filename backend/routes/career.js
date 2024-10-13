@@ -99,5 +99,21 @@ router.get('/getJobPathway/:category', async (req, res) => {
     }
   });
 
+  router.get('/getJobName/:jobId', async (req, res) => {
+    const { jobId } = req.params;
+  
+    try {
+      // Find the job by ID
+      const job = await Job.findById(jobId);
+      if (!job) {
+        return res.status(404).json({ message: 'Job not found' });
+      }
+  
+      // Return the job name
+      res.status(200).json({ jobName: job.title });
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching job name' });
+    }
+  });
 
 module.exports = router;
