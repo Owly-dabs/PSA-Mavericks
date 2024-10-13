@@ -1,15 +1,14 @@
 // src/components/PerformancePage.js
-import React from 'react';
+import React , { useState }from 'react';
 import { Typography, Box, Grid } from '@mui/material';
-import Navbar from './Navbar.jsx';
 import Carousel from 'react-slick'; // Ensure you have react-slick installed
 
-// const achievements = [
-//     { title: 'Achievement 1', icon: '🏆' },
-//     { title: 'Achievement 2', icon: '🌟' },
-//     { title: 'Achievement 3', icon: '🥇' },
-// ];
-const [achievements, setAchievements] = useState([]);
+const achievements = [
+    { title: 'Achievement 1', icon: '🏆' },
+    { title: 'Achievement 2', icon: '🌟' },
+    { title: 'Achievement 3', icon: '🥇' },
+];
+// const [achievements, setAchievements] = useState([]);
 
 const feedbacks = [
     "Great job on the project! Your dedication really showed.",
@@ -18,10 +17,11 @@ const feedbacks = [
 ];
 
 useEffect(() => {
-    
+    // get user id from session storage
+    userId = sessionStorage.getItem('userId')
 
     // Replace with your actual API endpoint
-    const apiEndpoint = 'http://localhost:3000/api/performance/getBadges/:userid';
+    const apiEndpoint = 'http://localhost:3000/api/performance/getBadges/' + userId;
 
     fetch(apiEndpoint)
         .then(response => {
