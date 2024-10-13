@@ -27,16 +27,16 @@ function LoginPage({ onLogin }) {
       }
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       // Store the userId in sessionStorage
       sessionStorage.setItem('userId', data.user._id);
       
       const storedUserId = sessionStorage.getItem('userId');
-      console.log('Stored userId:', storedUserId);
+      // console.log('Stored userId:', storedUserId);
 
       if (storedUserId) {
-        console.log('User ID successfully stored:', storedUserId);
+        // console.log('User ID successfully stored:', storedUserId);
       } else {
         console.error('Failed to store user ID');
       }

@@ -15,7 +15,7 @@ function PerformancePage() {
 
     useEffect(() => {
         const badgeEndpoint = `${process.env.BACKEND_URL}/api/performance/getBadges/${userId}`;
-        console.log(badgeEndpoint)
+        // console.log(badgeEndpoint)
 
         fetch(badgeEndpoint)
             .then(response => {
@@ -26,14 +26,14 @@ function PerformancePage() {
             })
             .then(data => {
                 setAchievements(data["badges"]);
-                console.log(data["badges"]);
+                // console.log(data["badges"]);
             })
             .catch(error => {
                 console.error("There was an error fetching the achievements!", error);
             });
 
         const feedbackEndpoint = `${process.env.BACKEND_URL}/api/performance/${userId}/getFeedback`;
-        console.log(feedbackEndpoint)
+        // console.log(feedbackEndpoint)
 
         fetch(feedbackEndpoint)
             .then(response => {
@@ -44,7 +44,7 @@ function PerformancePage() {
             })
             .then(data => {
                 setFeedbacks(data["feedbackList"]);
-                console.log(data["feedbackList"]);
+                // console.log(data["feedbackList"]);
             })
             .catch(error => {
                 console.error("There was an error fetching the achievements!", error);

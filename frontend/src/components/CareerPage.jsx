@@ -38,7 +38,7 @@ function CareerPage() {
               }
               const JNdata = await JNresponse.json();
               setUserJob(JNdata.jobName);
-              console.log(userJob)
+              // console.log(userJob)
 
               const response = await fetch(`${process.env.BACKEND_URL}/api/career/getJobPathway/${jobCategory}`);
               if (!response.ok) {
@@ -46,7 +46,7 @@ function CareerPage() {
               }
               const data = await response.json();
               setCareerPathway(data);
-              console.log(careerPathway);
+              // console.log(careerPathway);
           } catch (error) {
               console.error("Error fetching user info:", error);
           }
