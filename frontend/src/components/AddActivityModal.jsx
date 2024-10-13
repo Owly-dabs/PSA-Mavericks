@@ -34,7 +34,7 @@ function AddActivityModal({ open, handleClose }) {
         creator,
         category,
       };
-
+  
       const response = await fetch('http://localhost:3000/api/engagement/createActivity', {
         method: 'POST',
         headers: {
@@ -42,12 +42,13 @@ function AddActivityModal({ open, handleClose }) {
         },
         body: JSON.stringify(activityData), // Send the activity data to the backend
       });
-
+  
       const result = await response.json();
-
+  
       if (response.ok) {
         alert('Activity created successfully!');
         handleClose(); // Close the modal
+        window.location.reload(); // Refresh the page to reflect the new activity
       } else {
         alert(`Error: ${result.error}`);
       }
@@ -55,6 +56,7 @@ function AddActivityModal({ open, handleClose }) {
       console.error('Error creating activity:', error);
     }
   };
+  
 
   return (
     <Modal

@@ -3,6 +3,7 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 import Navbar from './Navbar.jsx';
 import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
+import CoursesCard from './CoursesCard.jsx';
 
 function CareerPage() {
     return (
@@ -16,8 +17,13 @@ function CareerPage() {
                 <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'left' }}>Current track: ___</Typography>
             </Box>
             <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'left' }}>
-              Recommended courses for you
+              Recommended courses for you:
             </Typography>
+
+
+         
+            <CoursesCard />
+
           </Box>
           <Box sx={{ flexGrow: 1 }} />  {/* This takes up the remaining space */}
           <CareerPathwayTimeline sx={{ display: 'flex', justifyContent: 'right' }} />

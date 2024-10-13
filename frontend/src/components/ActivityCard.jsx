@@ -9,9 +9,10 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ClockIcon from '../assets/clock.png'; 
 import CalendarIcon from '../assets/calendar.png'; 
+import VacanciesIcon from '../assets/vacancies.png'; 
 import dayjs from 'dayjs'; // Import dayjs for date formatting
 
-export default function MediaCard({ title, date, time, id, image }) {
+export default function MediaCard({ title, date, time, id, image, vacancies }) {
   const navigate = useNavigate(); // Use the hook to navigate
 
   // Function to format the date in dd MMM yyyy format
@@ -56,6 +57,12 @@ export default function MediaCard({ title, date, time, id, image }) {
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {formatTime(time)} {/* Use the formatTime function */}
           </Typography>
+
+          <img src={VacanciesIcon} style={{ display: 'flex', marginLeft:'12px',  width: '0.9em' }} alt="clock icon" />
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {vacancies}
+          </Typography>
+
         </Box>
       </CardContent>
       <CardActions>
