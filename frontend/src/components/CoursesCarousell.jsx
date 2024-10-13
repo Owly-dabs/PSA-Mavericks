@@ -1,8 +1,9 @@
 import React from 'react';
 import Slider from 'react-slick';
-import CoursesCard from './CoursesCard';  // Import your CoursesCard component
+import CoursesCard from './CoursesCard.jsx';  // Import your CoursesCard component
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { projectManagementCourses } from './mock.jsx'; // Import the mock data
 
 const CoursesCarousel = () => {
   const settings = {
@@ -18,12 +19,17 @@ const CoursesCarousel = () => {
   return (
     <div>
       <Slider {...settings}>
-        {/* Map through courses to render each CoursesCard */}
-        {[1, 2, 3, 4, 5, 6].map((course, index) => (
-          <div key={index}>
-            <CoursesCard course={course} />
-          </div>
-        ))}
+            {/* Map through the projectManagementCourses array to render each CoursesCard */}
+            {projectManagementCourses.map((course, index) => (
+                    <div key={index}>
+                        <CoursesCard
+                        title={course.title}
+                        description={course.description}
+                        image={course.image}
+                        id={index} // Use the index as the course ID or you could use a unique identifier if available
+                        />
+                    </div>
+                    ))}
       </Slider>
     </div>
   );

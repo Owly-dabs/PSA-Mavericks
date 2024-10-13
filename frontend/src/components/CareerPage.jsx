@@ -5,12 +5,19 @@ import Button from '@mui/material/Button';
 import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import CoursesCarousell from './CoursesCarousell.jsx';
+import { projectManagementCourses } from './mock.jsx';
 
 function CareerPage() {
   const [featuredCourse, setFeaturedCourse] = useState(null);
   const [relevantCourses, setRelevantCourses] = useState([]);
   const [userJob, setUserJob] = useState("");
   const [careerPathway, setCareerPathway] = useState([]);
+
+  // Get a random course from mock data
+  const getRandomCourse = () => {
+    const randomIndex = Math.floor(Math.random() * projectManagementCourses.length);
+    return projectManagementCourses[randomIndex];
+  };
 
   useEffect(() => {
       const userId = sessionStorage.getItem('userId');
@@ -78,12 +85,13 @@ function CareerPage() {
       // fetchRelevantCourses();
   }, []);
 
+    const randomCourse = getRandomCourse();
     return (
       <Box sx={{ padding: '2em' }}>
         <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold' }}>CAREER 🌱</Typography>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', padding: '2em', background:'rgba(255, 255, 255, 0.7)', borderRadius:'20px' }}>
-          <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Your current role is: ___</Typography>
+          <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Your current role is: Assistant Project Manager</Typography>
           <CareerPathwayTimeline sx={{ display: 'flex', justifyContent: 'right' }} />
         </Box>
 
@@ -94,7 +102,7 @@ function CareerPage() {
           {/* Centering the CoursesCard and giving it a specific width */}
           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
           <img
-            src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={randomCourse.image}
             style={{
               width: '50vw', // Set width to fill its container
               height: '40vh', // Define a fixed height
@@ -116,8 +124,8 @@ function CareerPage() {
             paddingTop:'2em',
             
           }}>
-            <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>Course Title</Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1em' }}>Course Description</Typography>
+            <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>{randomCourse.title}</Typography>
+            <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.description}</Typography>
             <Button size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
           </Box>
           </Box>
