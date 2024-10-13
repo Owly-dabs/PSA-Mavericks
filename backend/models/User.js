@@ -17,10 +17,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     }, 
-    userInfo: { // Reference to UserInfo
-        type: Schema.Types.ObjectId, 
-        ref: 'UserInfo' 
-    } 
 });
 
 const User = mongoose.model("User", userSchema);

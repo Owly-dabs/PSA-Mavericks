@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const UserInfo = require('../models/UserInfo');
 
 router.post('/register', async (req, res) => { 
     const {name, email, password} = req.body;
@@ -12,11 +13,11 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
-        
-        const newUserInfo = new UserInfo({ email, signedUpActivities: [] }); //since email is unique 
-        await newUserInfo.save();
-        const newUser = new User({name, email, password, userInfoId: userInfo._id });
+
+        const newUser = new User({name, email, password});
         await newUser.save();
+        const newUserInfo = new UserInfo({ user: newUser._id, signedUpActivities: [] }); 
+        await newUserInfo.save();
 
         res.status(201).json({ message: 'User created successfully' });
 
@@ -41,5 +42,29 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Login error' });
       }
 }); 
+
+/*router.post('/update', async (req, res) => { 
+    const {userId} = req.body;
+    
+    const newUserInfo = new UserInfo({ userId, signedUpActivities: [] }); 
+    await newUserInfo.save();
+
+    res.status(201).json({ message: 'User created successfully' });
+
+}); */
+
+router.post('/update', async (req, res) => {
+  const users = await User.find({});
+  
+  for (const user of users) {
+    const userInfo = new UserInfo({
+        user: user._id,
+        signedUpActivities: [] // Assign the User ID to the userInfo document
+      });
+      
+      await userInfo.save();
+  }
+  console.log('All users updated with userInfoId');
+})
 
 module.exports = router;
