@@ -9,7 +9,11 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true, // Job description is required
   },
-}, { timestamps: true }); // Automatically adds createdAt and updatedAt timestamps
+  category: {
+    type:String,
+    required: true,
+  }
+}); 
 
 const Job = mongoose.model('Job', jobSchema);
 
