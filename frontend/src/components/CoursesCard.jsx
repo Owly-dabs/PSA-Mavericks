@@ -20,7 +20,7 @@ export default function CourseCard({ title, date, time, id, image, vacancies }) 
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 320 }}>
       {/* Display course image or a default image */}
       <CardMedia
         sx={{ height: 140 }}

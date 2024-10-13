@@ -35,37 +35,46 @@ export default function MediaCard({ title, date, time, id, image, vacancies }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      height: '100%', 
+      maxWidth: 345,
+      boxShadow: 3,
+      borderRadius: '8px',
+    }}>
       {/* Display activity image or a default image */}
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ 
+          height: 140, 
+          objectFit: 'cover',
+        }}
         image={image || "/static/images/cards/default-image.jpg"} // Fallback to a default image if no image is provided
         title={title}
       />
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
 
         <Box display="flex" alignItems="center" mb={1}>
-          <img src={CalendarIcon} style={{ display: 'flex', marginRight: '6px', width: '0.9em' }} alt="calendar icon" />
-          <Typography variant="body2" sx={{ color: 'text.secondary', mr: 2 }}>
+          <img src={CalendarIcon} style={{ display: 'flex', marginRight: '4px', width: '0.9em' }} alt="calendar icon" />
+          <Typography variant="body2" sx={{ color: 'text.secondary', mr: 1 }}>
             {formatDate(date)} {/* Use the formatDate function */}
           </Typography>
 
-          <img src={ClockIcon} style={{ display: 'flex', marginRight: '6px', width: '0.9em' }} alt="clock icon" />
+          <img src={ClockIcon} style={{ display: 'flex', marginRight: '4px', width: '0.9em' }} alt="clock icon" />
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {formatTime(time)} {/* Use the formatTime function */}
           </Typography>
 
-          <img src={VacanciesIcon} style={{ display: 'flex', marginLeft:'12px',  width: '0.9em' }} alt="clock icon" />
+          <img src={VacanciesIcon} style={{ display: 'flex', marginLeft:'8px',marginRight: '6px',  width: '0.9em' }} alt="vacancies icon" />
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
             {vacancies}
           </Typography>
-
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ justifyContent: 'center' }}>
         <Button size="small" onClick={handleReadMore}>Learn More</Button>
       </CardActions>
     </Card>

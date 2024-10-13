@@ -67,7 +67,7 @@ function EngagementPage() {
         {/* Flexbox container for the sidebar and main content */}
         <div style={{ display: 'flex', gap: '2em' }}>
           {/* Sidebar on the left */}
-          <div style={{ flex: '0 0 250px', maxWidth: '250px' }}>
+          <div style={{ flex: '0 0 180px', maxWidth: '180px' }}>
             <EngagementSidebar onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
           </div>
 

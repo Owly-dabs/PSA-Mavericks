@@ -9,7 +9,7 @@ const CoursesCarousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,   // Number of cards to show at once
+    slidesToShow: 4,   // Number of cards to show at once
     slidesToScroll: 1, // Scroll one card at a time
     nextArrow: <NextArrow />,  // Custom next arrow
     prevArrow: <PrevArrow />,  // Custom previous arrow
