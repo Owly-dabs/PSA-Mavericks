@@ -43,15 +43,6 @@ router.post('/login', async (req, res) => {
       }
 }); 
 
-/*router.post('/update', async (req, res) => { 
-    const {userId} = req.body;
-    
-    const newUserInfo = new UserInfo({ userId, signedUpActivities: [] }); 
-    await newUserInfo.save();
-
-    res.status(201).json({ message: 'User created successfully' });
-
-}); */
 
 router.post('/update', async (req, res) => {
   const users = await User.find({});
