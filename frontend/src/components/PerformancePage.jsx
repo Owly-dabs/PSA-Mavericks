@@ -4,17 +4,39 @@ import { Typography, Box, Grid } from '@mui/material';
 import Navbar from './Navbar.jsx';
 import Carousel from 'react-slick'; // Ensure you have react-slick installed
 
-const achievements = [
-    { title: 'Achievement 1', icon: '🏆' },
-    { title: 'Achievement 2', icon: '🌟' },
-    { title: 'Achievement 3', icon: '🥇' },
-];
+// const achievements = [
+//     { title: 'Achievement 1', icon: '🏆' },
+//     { title: 'Achievement 2', icon: '🌟' },
+//     { title: 'Achievement 3', icon: '🥇' },
+// ];
+const [achievements, setAchievements] = useState([]);
 
 const feedbacks = [
     "Great job on the project! Your dedication really showed.",
     "Your teamwork skills are exemplary, keep it up!",
     "The presentation was top-notch! You really engaged the audience.",
 ];
+
+useEffect(() => {
+    
+
+    // Replace with your actual API endpoint
+    const apiEndpoint = 'http://localhost:3000/api/performance/getBadges/:userid';
+
+    fetch(apiEndpoint)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            setAchievements(data["badges"]);
+        })
+        .catch(error => {
+            console.error("There was an error fetching the achievements!", error);
+        });
+}, []);
 
 function PerformancePage() {
     const carouselSettings = {
@@ -27,7 +49,6 @@ function PerformancePage() {
 
     return (
         <>
-            <Navbar />
             <Box sx={{ padding: 2 }}>
                 <Typography variant="h4" gutterBottom>
                     Performance Overview
