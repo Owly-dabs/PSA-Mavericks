@@ -62,4 +62,28 @@ router.get('/:userId/getFeedback', async (req, res) => {
     }
 });
 
+//create badge 
+router.post('/createBadge', async (req, res) => {
+    const { name, description, iconUrl } = req.body;
+  
+    try {
+      // Check if badge name already exists
+      const existingBadge = await Badge.findOne({ name });
+      if (existingBadge) {
+        return res.status(400).json({ message: 'Badge already exists' });
+      }
+  
+      // Create new badge
+      const newBadge = new Badge({
+        name,
+        description,
+        iconUrl,
+      });
+  
+      await newBadge.save();
+      res.status(201).json({ message: 'Badge created successfully', badge: newBadge });
+    } catch (error) {
+      res.status(500).json({ error: 'Error creating badge' });
+    }
+  });
 module.exports = router;  
