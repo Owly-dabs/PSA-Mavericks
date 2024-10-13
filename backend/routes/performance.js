@@ -40,6 +40,26 @@ router.post('/submitFeedback', async (req, res) => {
     }
 });
 
-
+router.get('/:userId/getFeedback', async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      // Find the user's UserInfo to get the feedback IDs
+      const userInfo = await UserInfo.findOne({ user: userId }).populate('feedbackReceived');
+      
+      if (!userInfo || userInfo.feedbackReceived.length === 0) {
+        return res.status(404).json({ message: 'No feedback found for this user' });
+      }
+  
+      // Populate the feedback data using the feedback IDs stored in userInfo
+      const feedbackList = await Feedback.find({
+        _id: { $in: userInfo.feedbackReceived } // Fetch feedback based on stored feedback IDs
+      });
+  
+      res.status(200).json({ message: 'Feedback retrieved successfully', feedbackList });
+    } catch (error) {
+      res.status(500).json({ error: 'Error retrieving feedback' });
+    }
+});
 
 module.exports = router;  
