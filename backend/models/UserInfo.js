@@ -11,6 +11,10 @@ const userInfoSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Activity', // Referencing the Activity model
     }],
+    feedbackReceived: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Feedback',
+    }]
     // Additional user-related information can be stored here if needed
   });
 
