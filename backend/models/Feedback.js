@@ -7,7 +7,12 @@ const feedbackSchema = new Schema({
     required: true,
     trim: true
   },
-  user: {
+  userSent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Linking the feedback to the user
+    required: true
+  },
+  userReceived: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Linking the feedback to the user
     required: true

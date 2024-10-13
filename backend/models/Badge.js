@@ -11,10 +11,6 @@ const badgeSchema = new Schema({
     type: String,
     required: true
   },
-  criteria: {
-    type: String, // Criteria to earn the badge, can be based on various metrics
-    required: true
-  },
   icon: {
     type: String, // URL for the badge's icon image
     required: false

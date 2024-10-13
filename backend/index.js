@@ -5,6 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv').config(); 
 const authRouter = require('./routes/auth');
 const engageRouter = require('./routes/engagement');
+const perfRouter = require('./routes/performance');
 
 const app = express(); 
 app.use(express.json());
@@ -24,3 +25,4 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/api/auth', authRouter);
 app.use('/api/engagement', engageRouter); 
+app.use('/api/performance', perfRouter); 
