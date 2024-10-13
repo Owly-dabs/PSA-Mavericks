@@ -139,13 +139,13 @@ router.post('/setBadges', async (req, res) => {
   
     try {
       // Find user info for the specified user
-      const userInfo = await UserInfo.findOne({ user: userId }).populate('badges');
-      if (!userInfo) {
+      const currUserInfo = await UserInfo.findOne({ user: userId }).populate('badgesReceived');
+      if (!currUserInfo) {
         return res.status(404).json({ message: 'User info not found' });
       }
   
       // Send the user's badges
-      res.status(200).json({ badges: userInfo.badgesReceived });
+      res.status(200).json({ badges: currUserInfo.badgesReceived });
     } catch (error) {
       res.status(500).json({ error: 'Error fetching badges' });
     }

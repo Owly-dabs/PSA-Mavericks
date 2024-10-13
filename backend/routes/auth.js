@@ -58,4 +58,5 @@ router.post('/update', async (req, res) => {
   console.log('All users updated with userInfoId');
 })
 
+
 module.exports = router;
