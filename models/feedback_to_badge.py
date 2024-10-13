@@ -72,3 +72,4 @@ MOCK_FEEDBACK = \
     "John consistently sets and achieves ambitious goals, demonstrating a strong focus on driving projects to successful completion. His reliability is evident in his ability to consistently deliver high-quality work without the need for supervision, making him a dependable asset to our team. John's punctuality is exemplary; he consistently arrives on time for meetings and deadlines, ensuring that projects progress smoothly. As a team player, John actively participates in group efforts and supports his colleagues, fostering a collaborative and positive work environment. Moreover, John's attention to detail ensures that tasks are completed with a high level of accuracy and minimal errors. His meticulous approach contributes significantly to the overall quality of our team's output."
 
 MOCK_RESPONSE = "Badge 1: Effective Communicator\nBadge 2: Problem Solver\nBadge 3: Team Player"
+
