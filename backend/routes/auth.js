@@ -58,6 +58,22 @@ router.post('/update', async (req, res) => {
   console.log('All users updated with userInfoId');
 })
 
-
+// Route to get UserInfo by User ID
+router.get('/getUserInfo/:userId', async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      // Find the UserInfo document by user ID
+      const userInfo = await UserInfo.findOne({ user: userId });
+      
+      if (!userInfo) {
+        return res.status(404).json({ message: 'UserInfo not found' });
+      }
+  
+      res.status(200).json(userInfo);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching UserInfo' });
+    }
+  });
 
 module.exports = router;
