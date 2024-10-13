@@ -47,7 +47,7 @@ def get_feedback_to_badge(feedback):
 
     response = requests.request("POST", url, json=payload, headers=headers)
 
-    print(response.text)
+    # print(response.text)
 
     return response.json()["choices"][0]["message"]["content"]
 
@@ -78,3 +78,5 @@ def parse_response_to_list(response):
     lines = response.split("\n")
     for line in lines:
         badges.append(line.split(": ")[1])
+
+    return badges

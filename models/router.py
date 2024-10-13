@@ -29,13 +29,28 @@ def handle_request(user_id):
     # Run feedback_to_badge function to get top 3 badges
     top_badges_string = get_feedback_to_badge(combined_feedback)
     top_badges_list = parse_response_to_list(top_badges_string)
+    if len(top_badges_list) != 3:
+        return jsonify({'status': 'failure', 'error': 'Model failed to give 3 badges'}), 400
     
     # Create request object with badges 
+    request_object = {
+        "userId": user_id,
+        "badgeNames": top_badges_list,
+    }
     
+    # Send POST request to setBadges
+    badgesResponse = requests.post(
+        f'{BACKEND_URL}/api/performance/setBadges',
+        json=request_object
+    )
+    if badgesResponse.status_code != 200:
+        return jsonify({'status': 'failure', 'error': 'Failed to set badges'}), badgesResponse.status_code
     
-    # Send POST request to setBadge
-    
-    return jsonify({"combinedFeedback": combined_feedback}), 200
+    return jsonify({
+        "message": "Badges updated successfully",
+        "combinedFeedback": combined_feedback,
+        "badges": top_badges_list
+    }), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
