@@ -48,7 +48,7 @@ export default function CareerPathwayTimeline() {
   return (
     <Box sx={{ padding: '2em' }}>
       <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>
-        Career Pathway Timeline
+        Your potential career pathway with PSA
       </Typography>
 
       <Timeline position="alternate">
