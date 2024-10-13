@@ -86,4 +86,53 @@ router.post('/createBadge', async (req, res) => {
       res.status(500).json({ error: 'Error creating badge' });
     }
   });
+
+
+router.post('/setBadges', async (req, res) => {
+    const { userId, badge1, badge2, badge3 } = req.body;
+  
+    // Ensure all badge fields are provided
+    if (!badge1 || !badge2 || !badge3) {
+      return res.status(400).json({ message: 'Please provide badge1, badge2, and badge3' });
+    }
+  
+    try {
+      // Find the user info that stores the badges
+      const userInfo = await UserInfo.findOne({ user: userId });
+      if (!userInfo) {
+        return res.status(404).json({ message: 'User info not found' });
+      }
+  
+      // Find badges by their names (case insensitive)
+      const badges = await Badge.find({
+        name: { 
+          $in: [badge1, badge2, badge3].map(name => new RegExp(`^${name}$`, 'i')) // Case-insensitive matching
+        }
+      });
+  
+      if (badges.length !== 3) {
+        return res.status(404).json({ message: 'One or more badges not found' });
+      }
+  
+      // Attach badges if not already assigned
+      let badgesAdded = 0;
+      userInfo.badgesReceived = [];
+      await userInfo.save();
+      for (const badge of badges) {
+        userInfo.badgesReceived.push(badge._id);          // Add badge to user's badges
+        badgesAdded++;
+        }
+  
+      await userInfo.save();
+  
+      if (badgesAdded === 3) {
+        res.status(200).json({ message: `${badgesAdded} badges successfully attached`, badges });
+      } else {
+        res.status(400).json({ message: 'badges not successfully assigned' });
+      }
+  
+    } catch (error) {
+      res.status(500).json({ error: 'Error attaching badges to user' });
+    }
+  });
 module.exports = router;  
