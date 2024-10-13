@@ -1,14 +1,13 @@
-// src/components/LoginPage.js
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import { TextField, Button, Typography, Box, Snackbar } from '@mui/material';
 import backgroundImage from '../assets/background.png'; 
 import PSALogo from '../assets/PSALogo.png'; 
-import Snackbar from '@mui/material/Snackbar';
-
 
 function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');  // State to store error message
+  const [openSnackbar, setOpenSnackbar] = useState(false);  // State to control Snackbar visibility
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,27 +22,43 @@ function LoginPage({ onLogin }) {
       });
 
       if (!response.ok) {
-        throw new Error(response.body);
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Login failed');
       }
 
       const data = await response.json();
-
-      
       console.log(data);
-      
 
+      // Store the userId in sessionStorage
+      sessionStorage.setItem('userId', data.user._id);
+      
+      const storedUserId = sessionStorage.getItem('userId');
+      console.log('Stored userId:', storedUserId);
+
+      if (storedUserId) {
+        console.log('User ID successfully stored:', storedUserId);
+      } else {
+        console.error('Failed to store user ID');
+      }
+
+      // Call the onLogin function to update the app state (like redirecting or showing the user as logged in)
       onLogin();
 
-      // Assuming the response contains a token
-      // if (data.token) {
-      //   // Store the token (e.g., in localStorage or state)
-      //   localStorage.setItem('token', data.token);
+      // Reset the error state
+      setErrorMessage('');
+      setOpenSnackbar(false);
 
-        // Call the onLogin function to update the app state
-      // }
     } catch (error) {
       console.error('There was an error!', error);
+
+      // Set the error message and open the Snackbar
+      setErrorMessage(error.message);
+      setOpenSnackbar(true);
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);  // Close the Snackbar
   };
 
   return (
@@ -51,7 +66,7 @@ function LoginPage({ onLogin }) {
       className="LoginPage"
       style={{
         display: 'flex',
-      flexDirection: 'column',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
@@ -61,45 +76,60 @@ function LoginPage({ onLogin }) {
         backgroundRepeat: 'no-repeat', // Prevent image repetition
       }}
     >
-      <img src={PSALogo}
-          alt="Logo" 
-          style={{
-            display: 'block',
-            margin: '0 auto',
-            maxWidth: '15em',
-            height: 'auto',
-            justifyItems:'left',
+      <img
+        src={PSALogo}
+        alt="Logo" 
+        style={{
+          display: 'block',
+          margin: '0 auto',
+          maxWidth: '15em',
+          height: 'auto',
+          justifyItems: 'left',
+        }}
+      />
+
+      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, mb: 20, mx: 'auto', maxWidth: 400, backgroundColor: 'rgba(255, 255, 255, 0.7)', padding: '2em', borderRadius: '20px' }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Log in ✨
+        </Typography>
+        <TextField
+          fullWidth
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Password"
+          type="password"
+          variant="outlined"
+          margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+          Login
+        </Button>
+      </Box>
+
+      {/* Snackbar for error messages */}
+      <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={handleCloseSnackbar}
+          message={errorMessage}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          sx={{ 
+            backgroundColor: '#f2543f',  // Ensure the Snackbar itself is red
+            '.MuiSnackbarContent-root': {
+              backgroundColor: '#f2543f',  // Specifically style the Snackbar content
+              color: 'white',          // Ensure the text inside is white
+            }
           }}
-      ></img> 
-
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1, mx: 'auto', maxWidth: 400, backgroundColor: 'rgba(255, 255, 255, 0.7)', padding: '2em', borderRadius: '20px'}}>
-
-          <Typography variant="h4" component="h1" gutterBottom>
-            Log in ✨
-          </Typography>
-          <TextField
-            fullWidth
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            label="Password"
-            type="password"
-            variant="outlined"
-            margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-            Login
-          </Button>
-        </Box>
+        />
     </div>
-
   );
 }
 
