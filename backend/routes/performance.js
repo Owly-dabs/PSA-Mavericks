@@ -89,11 +89,11 @@ router.post('/createBadge', async (req, res) => {
 
 
 router.post('/setBadges', async (req, res) => {
-    const { userId, badge1, badge2, badge3 } = req.body;
+    const { userId, badgeNames } = req.body;
   
     // Ensure all badge fields are provided
-    if (!badge1 || !badge2 || !badge3) {
-      return res.status(400).json({ message: 'Please provide badge1, badge2, and badge3' });
+    if (!Array.isArray(badgeNames) || badgeNames.length !== 3) {
+        return res.status(400).json({ message: 'Please provide exactly 3 badge names' });
     }
   
     try {
@@ -104,17 +104,15 @@ router.post('/setBadges', async (req, res) => {
       }
   
       // Find badges by their names (case insensitive)
-      const badges = await Badge.find({
-        name: { 
-          $in: [badge1, badge2, badge3].map(name => new RegExp(`^${name}$`, 'i')) // Case-insensitive matching
-        }
+      const badges = await Badge.find({ 
+        name: { $in: badgeNames.map(name => new RegExp(`^${name}$`, 'i')) } // Case-insensitive matching
       });
   
       if (badges.length !== 3) {
         return res.status(404).json({ message: 'One or more badges not found' });
       }
   
-      // Attach badges if not already assigned
+      // remove existing badges and add new badges 
       let badgesAdded = 0;
       userInfo.badgesReceived = [];
       await userInfo.save();
@@ -135,4 +133,6 @@ router.post('/setBadges', async (req, res) => {
       res.status(500).json({ error: 'Error attaching badges to user' });
     }
   });
+
+  
 module.exports = router;  
