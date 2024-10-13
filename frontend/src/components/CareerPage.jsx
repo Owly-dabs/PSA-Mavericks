@@ -1,6 +1,7 @@
 // src/components/HomePage.js
 import React from 'react';
 import { Typography, Box } from '@mui/material';
+import Button from '@mui/material/Button';
 import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import CoursesCarousell from './CoursesCarousell.jsx';
@@ -10,24 +11,51 @@ function CareerPage() {
       <Box sx={{ padding: '2em' }}>
         <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold' }}>CAREER 🌱</Typography>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', paddingBottom: '2em' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', padding: '2em', background:'rgba(255, 255, 255, 0.7)', borderRadius:'20px' }}>
           <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Your current role is: ___</Typography>
           <CareerPathwayTimeline sx={{ display: 'flex', justifyContent: 'right' }} />
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', paddingBottom: '2em' }}>
-          <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Recommended Course</Typography>
+        <Typography variant="h5" sx={{ marginTop: '1em', textAlign: 'center', padding: '0.5em' }}>Recommended Course</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', margin:'2em',padding: '2em', background:'rgba(255, 255, 255, 0.7)', borderRadius:'20px'}}>
+          
 
           {/* Centering the CoursesCard and giving it a specific width */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-            <CoursesCard sx={{ width: '100%', maxWidth: '600px', textAlign: 'center' }} />
+          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
+          <img
+            src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            style={{
+              width: '50vw', // Set width to fill its container
+              height: '40vh', // Define a fixed height
+              objectFit: 'cover',
+              flex: '0 0 auto',
+              padding: '2em',
+              borderRadius: '20px'
+            }}
+            alt="Course"
+          />
+
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'flex-start', // Align the content at the top
+            alignItems: 'flex-start', // Align items horizontally at the start (left-aligned)
+            width: '100%',
+            mx:'2em',
+            paddingTop:'2em',
+            
+          }}>
+            <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>Course Title</Typography>
+            <Typography variant="body1" sx={{ marginBottom: '1em' }}>Course Description</Typography>
+            <Button size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
+          </Box>
           </Box>
         </Box>
 
-        <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'left' }}>
-          Other relevant courses:
+        <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center', padding:'0.5em' }}>
+          Other relevant courses
         </Typography>
-        <Box sx={{ px: '2em' }}>
+        <Box sx={{ px: '2em', paddingBottom:'5em' }}>
           <CoursesCarousell />
         </Box>
       </Box>

@@ -18,7 +18,7 @@ export default function HorizontalLinearAlternativeLabelStepper() {
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
-            <Paper sx={{mt:'1em', padding:'1em', mx: '5em'}}>job desc</Paper>
+            <Paper sx={{mt:'1em', padding:'1em', mx: '5em',}}>job desc</Paper>
           </Step>
         ))}
       </Stepper>
