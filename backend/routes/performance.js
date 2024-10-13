@@ -64,7 +64,7 @@ router.get('/:userId/getFeedback', async (req, res) => {
 
 //create badge 
 router.post('/createBadge', async (req, res) => {
-    const { name, description, iconUrl } = req.body;
+    const { name, description, icon } = req.body;
   
     try {
       // Check if badge name already exists
@@ -77,7 +77,7 @@ router.post('/createBadge', async (req, res) => {
       const newBadge = new Badge({
         name,
         description,
-        iconUrl,
+        icon,
       });
   
       await newBadge.save();
