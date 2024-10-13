@@ -1,12 +1,12 @@
-// src/components/HomePage.js
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import CoursesCarousell from './CoursesCarousell.jsx';
 import { projectManagementCourses } from './mock.jsx';
-import UserIcon from '../assets/user.png'
+import UserIcon from '../assets/user.png';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function CareerPage() {
   const [featuredCourse, setFeaturedCourse] = useState(null);
@@ -14,7 +14,6 @@ function CareerPage() {
   const [userJob, setUserJob] = useState("");
   const [careerPathway, setCareerPathway] = useState([]);
 
-  // Get a random course from mock data
   const getRandomCourse = () => {
     const randomIndex = Math.floor(Math.random() * projectManagementCourses.length);
     return projectManagementCourses[randomIndex];
@@ -30,8 +29,8 @@ function CareerPage() {
                   throw new Error('Failed to fetch user info');
               }
               const UIdata = await UIresponse.json();
-              const jobId = UIdata.currentJob; // Assuming currentJob is in the response
-              const jobCategory = UIdata.jobCategory; // Assuming jobCategory is in the response
+              const jobId = UIdata.currentJob;
+              const jobCategory = UIdata.jobCategory;
 
               const JNresponse = await fetch(`${process.env.BACKEND_URL}/api/career/getJobName/${jobId}`);
               if (!JNresponse.ok) {
@@ -53,60 +52,29 @@ function CareerPage() {
           }
       };
 
-      const fetchFeaturedCourse = async () => {
-          try {
-              const response = await fetch(`${process.env.BACKEND_URL}/api/courses/featured`);
-              if (!response.ok) {
-                  throw new Error('Failed to fetch featured course');
-              }
-              const data = await response.json();
-              setFeaturedCourse(data);
-              console.log(featuredCourse);
-          } catch (error) {
-              console.error("Error fetching featured course:", error);
-          }
-      };
-
-      const fetchRelevantCourses = async () => {
-          try {
-              const response = await fetch(`${process.env.BACKEND_URL}/api/courses/relevant`);
-              if (!response.ok) {
-                  throw new Error('Failed to fetch relevant courses');
-              }
-              const data = await response.json();
-              setRelevantCourses(data);
-              console.log(relevantCourses);
-          } catch (error) {
-              console.error("Error fetching relevant courses:", error);
-          }
-      };
-
       fetchUserInfo();
-      // fetchFeaturedCourse();
-      // fetchRelevantCourses();
   }, []);
 
-    const randomCourse = getRandomCourse();
-    return (
-      <Box sx={{ padding: '2em' }}>
-        <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold' }}>CAREER 🌱</Typography>
+  const randomCourse = getRandomCourse();
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', padding: '2em', background:'rgba(255, 255, 255, 0.7)', borderRadius:'20px' }}>
-          <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Your current role is: Assistant Project Manager</Typography>
-          <CareerPathwayTimeline sx={{ display: 'flex', justifyContent: 'right' }} />
-        </Box>
+  return (
+    <Box sx={{ padding: '2em' }}>
+      <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold' }}>CAREER 🌱</Typography>
 
-        <Typography variant="h5" sx={{ marginTop: '1em', textAlign: 'center', padding: '0.5em' }}>Recommended Course</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', margin:'2em',padding: '2em', background:'rgba(255, 255, 255, 0.7)', borderRadius:'20px'}}>
-          
+      <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: '2em', padding: '2em', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '20px' }}>
+        <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center' }}>Your current role is: Assistant Project Manager</Typography>
+        <CareerPathwayTimeline sx={{ display: 'flex', justifyContent: 'right' }} />
+      </Box>
 
-          {/* Centering the CoursesCard and giving it a specific width */}
-          <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
+      <Typography variant="h5" sx={{ marginTop: '1em', textAlign: 'center', padding: '0.5em' }}>Recommended Course</Typography>
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: '2em', padding: '2em', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '20px' }}>
+
+        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '100%' }}>
           <img
             src={randomCourse.image}
             style={{
-              width: '50vw', // Set width to fill its container
-              height: '40vh', // Define a fixed height
+              width: '50vw',
+              height: '40vh',
               objectFit: 'cover',
               flex: '0 0 auto',
               padding: '2em',
@@ -115,44 +83,52 @@ function CareerPage() {
             alt="Course"
           />
 
-          <Box sx={{ 
-            display: 'flex', 
-            flexDirection: 'column', 
-            justifyContent: 'flex-start', // Align the content at the top
-            alignItems: 'flex-start', // Align items horizontally at the start (left-aligned)
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
             width: '100%',
-            mx:'2em',
-            paddingTop:'2em',
-            
+            mx: '2em',
+            paddingTop: '2em',
           }}>
             <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>{randomCourse.title}</Typography>
             <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.description}</Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
-                <img
-                  src={UserIcon}
-                  style={{
-                    width: '1.2em', // Adjust the size of the user icon
-                    height: '1.2em', // Keep the icon proportional
-                    marginRight: '0.5em', // Add space between icon and text
-                  }}
-                  alt="User icon"
-                />
-                <Typography variant="body1">{randomCourse.instructor}</Typography>
-              </Box>
+              <img
+                src={UserIcon}
+                style={{
+                  width: '1.2em',
+                  height: '1.2em',
+                  marginRight: '0.5em',
+                }}
+                alt="User icon"
+              />
+              <Typography variant="body1">{randomCourse.instructor}</Typography>
+            </Box>
 
-            <Button variant="outlined" size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
+            {/* Use Link to navigate to individual course page */}
+            <Button
+              variant="outlined"
+              size="small"
+              sx={{ width: '100%', marginTop: '1em' }}
+              component={Link}
+              to={`/courses/${randomCourse.id}`} // Navigate to course page with course ID
+            >
+              Learn More
+            </Button>
           </Box>
-          </Box>
-        </Box>
-
-        <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center', padding:'0.5em' }}>
-          Other relevant courses
-        </Typography>
-        <Box sx={{ px: '2em', paddingBottom:'5em' }}>
-          <CoursesCarousell />
         </Box>
       </Box>
-    );
+
+      <Typography variant="h5" sx={{ marginBottom: '1em', textAlign: 'center', padding: '0.5em' }}>
+        Other relevant courses
+      </Typography>
+      <Box sx={{ px: '2em', paddingBottom: '5em' }}>
+        <CoursesCarousell />
+      </Box>
+    </Box>
+  );
 }
 
 export default CareerPage;

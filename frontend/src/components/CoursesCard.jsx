@@ -12,11 +12,17 @@ export default function CoursesCard({
   description,
   image,
   id,
+  date,
+  time,
+  vacancies,
 }) {
   const navigate = useNavigate(); // Use the hook to navigate
 
   const handleLearnMore = () => {
-    navigate(`/courses/${id}`); // Navigate to the individual course page
+    // Pass course details via state when navigating
+    navigate(`/courses/${id}`, {
+      state: { title, description, image, date, time, vacancies }
+    });
   };
 
   return (

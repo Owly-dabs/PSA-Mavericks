@@ -8,6 +8,7 @@ import EngagementPage from './components/EngagementPage';
 import CareerPage from './components/CareerPage';
 import PerformancePage from './components/PerformancePage';
 import IndividualActivity from './components/IndividualActivity';
+import IndividualCourse from './components/IndividualCourse.jsx'
 import Footer from './components/Footer';  // Import the Footer component
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/career" element={isAuthenticated ? <CareerPage /> : <Navigate to="/" />} />
             <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />
             <Route path="/engagement/:id" element={isAuthenticated ? <IndividualActivity /> : <Navigate to="/" />} />
+            <Route path="/courses/:id" element={isAuthenticated ? <IndividualCourse /> : <Navigate to="/" />} />
           </Routes>
           {isAuthenticated && <Footer />}  {/* Add the footer here after login */}
         </div>

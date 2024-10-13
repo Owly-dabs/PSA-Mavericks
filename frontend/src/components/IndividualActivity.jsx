@@ -12,7 +12,7 @@ export default function IndividualActivity() {
     // Fetch the activity details using the ID from the URL
     const fetchActivity = async () => {
       try {
-        const response = await fetch(`${process.env.BACKEND_URL}/api/engagement/getActivity/${id}`);
+        const response = await fetch(`http://localhost:3000/api/engagement/getActivity/${id}`);
         const data = await response.json();
         setActivity(data);
         
@@ -39,7 +39,7 @@ export default function IndividualActivity() {
         return;
       }
 
-      const response = await fetch(`${process.env.BACKEND_URL}/api/engagement/${id}/signup`, {
+      const response = await fetch(`http://localhost:3000/api/engagement/${id}/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function IndividualActivity() {
         return;
       }
 
-      const response = await fetch(`${process.env.BACKEND_URL}/api/engagement/${id}/withdraw`, {
+      const response = await fetch(`http://localhost:3000/api/engagement/${id}/withdraw`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export default function IndividualActivity() {
   }
 
   return (
-    <Box sx={{ padding: '2em', display: 'flex', gap: '2em', alignItems: 'flex-start' }}>
+    <Box sx={{ padding: '2em', paddingBottom:'12em', display: 'flex', gap: '2em', alignItems: 'flex-start' }}>
       {/* Image section */}
       <img
         src={activity.image}
