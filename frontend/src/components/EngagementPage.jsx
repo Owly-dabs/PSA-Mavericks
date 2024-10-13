@@ -31,6 +31,7 @@ function EngagementPage() {
 
   // Function to handle category change
   const handleCategoryChange = (category) => {
+    // console.log('Selected category:', category);
     setSelectedCategory(category);
 
     if (category === 'All') {
