@@ -134,5 +134,20 @@ router.post('/setBadges', async (req, res) => {
     }
   });
 
+  router.get('/getBadges/:userId', async (req, res) => {
+    const { userId } = req.params;
   
+    try {
+      // Find user info for the specified user
+      const userInfo = await UserInfo.findOne({ user: userId }).populate('badges');
+      if (!userInfo) {
+        return res.status(404).json({ message: 'User info not found' });
+      }
+  
+      // Send the user's badges
+      res.status(200).json({ badges: userInfo.badgesReceived });
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching badges' });
+    }
+  });  
 module.exports = router;  
