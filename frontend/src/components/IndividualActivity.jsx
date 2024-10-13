@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
-import placeholderimg from '../assets/background.png';
 
 export default function IndividualActivity() {
   const { id } = useParams(); // Get the activity ID from the URL
@@ -22,7 +21,6 @@ export default function IndividualActivity() {
         if (userId && data.signedUpUsers.some(user => user._id === userId)) {
           setIsRegistered(true); // Mark as registered if user ID exists in signedUpUsers
         }
-        console.log(isRegistered);
       } catch (error) {
         console.error('Error fetching activity:', error);
       }
@@ -63,6 +61,38 @@ export default function IndividualActivity() {
     }
   };
 
+  // Function to handle the withdrawal
+  const handleWithdraw = async () => {
+    try {
+      const userId = sessionStorage.getItem('userId'); // Retrieve the user ID from sessionStorage
+
+      if (!userId) {
+        alert('You must be logged in to withdraw from an activity.');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:3000/api/engagement/${id}/withdraw`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId }), // Send the user ID in the request body
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert('Withdrawn from activity successfully!');
+        setActivity(data.activity); // Optionally update the activity after withdrawal
+        setIsRegistered(false); // Update the button state to show "Register"
+      } else {
+        alert(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error withdrawing from activity:', error);
+    }
+  };
+
   if (!activity) {
     return <p>Loading...</p>;
   }
@@ -89,19 +119,32 @@ export default function IndividualActivity() {
         <p>Details: {activity.details}</p>
         <p>Vacancies: {activity.vacancies}</p>
 
-        {/* Button changes based on registration state */}
-        <Button
-          variant="outlined"
-          style={{
-            width: '35vw',
-            borderColor: isRegistered ? 'green' : '#1876d2', // Green border if registered
-            color: isRegistered ? 'green' : '#1876d2', // Green text if registered
-          }}
-          onClick={handleRegister}
-          disabled={isRegistered} // Disable button if registered
-        >
-          {isRegistered ? 'REGISTERED' : 'Register'} {/* Button text changes */}
-        </Button>
+        {/* Conditionally render either Register or Withdraw button */}
+        {!isRegistered ? (
+          <Button
+            variant="outlined"
+            style={{
+              width: '35vw',
+              borderColor: '#1876d2',
+              color: '#1876d2',
+            }}
+            onClick={handleRegister}
+          >
+            Register
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            style={{
+              width: '35vw',
+              borderColor: 'red',
+              color: 'red',
+            }}
+            onClick={handleWithdraw}
+          >
+            Withdraw
+          </Button>
+        )}
       </Box>
     </Box>
   );
