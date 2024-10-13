@@ -11,8 +11,9 @@ const badgeSchema = new Schema({
     type: String,
     required: true
   },
-  criteria: {
-    type: String, // Criteria to earn the badge, can be based on various metrics
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Linking the badge to user 
     required: true
   },
   icon: {

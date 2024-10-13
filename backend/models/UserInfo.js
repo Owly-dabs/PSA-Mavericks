@@ -14,6 +14,10 @@ const userInfoSchema = new Schema({
     feedbackReceived: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Feedback',
+    }],
+    badgesReceived: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Badge',
     }]
     // Additional user-related information can be stored here if needed
   });
