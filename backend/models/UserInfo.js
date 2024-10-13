@@ -18,7 +18,16 @@ const userInfoSchema = new Schema({
     badgesReceived: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Badge',
-    }]
+    }],
+    currentJob: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Job',
+        required: true,
+    },
+    jobCategory: {
+        type: String, 
+        required: true,
+    }
     // Additional user-related information can be stored here if needed
   });
 
