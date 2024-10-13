@@ -6,6 +6,7 @@ import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
 import CoursesCard from './CoursesCard.jsx';
 import CoursesCarousell from './CoursesCarousell.jsx';
 import { projectManagementCourses } from './mock.jsx';
+import UserIcon from '../assets/user.png'
 
 function CareerPage() {
   const [featuredCourse, setFeaturedCourse] = useState(null);
@@ -126,8 +127,20 @@ function CareerPage() {
           }}>
             <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>{randomCourse.title}</Typography>
             <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.description}</Typography>
-            <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.instructor}</Typography>
-            <Button size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
+                <img
+                  src={UserIcon}
+                  style={{
+                    width: '1.2em', // Adjust the size of the user icon
+                    height: '1.2em', // Keep the icon proportional
+                    marginRight: '0.5em', // Add space between icon and text
+                  }}
+                  alt="User icon"
+                />
+                <Typography variant="body1">{randomCourse.instructor}</Typography>
+              </Box>
+
+            <Button variant="outlined" size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
           </Box>
           </Box>
         </Box>

@@ -49,7 +49,7 @@ export default function CoursesCard({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={handleLearnMore}>Learn More</Button>
+        <Button variant="outlined" size="small" onClick={handleLearnMore}>Learn More</Button>
       </CardActions>
     </Card>
   );
