@@ -35,7 +35,7 @@ function AddActivityModal({ open, handleClose }) {
         category,
       };
   
-      const response = await fetch('http://localhost:3000/api/engagement/createActivity', {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/engagement/createActivity`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -16,7 +16,7 @@ function EngagementPage() {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/engagement/getAllActivities');
+        const response = await fetch(`${process.env.BACKEND_URL}/api/engagement/getAllActivities`);
         console.log('Response status:', response.status);
         const data = await response.json();
         setActivities(data);

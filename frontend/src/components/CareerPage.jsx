@@ -24,7 +24,7 @@ function CareerPage() {
 
       const fetchUserInfo = async () => {
           try {
-              const UIresponse = await fetch(`http://localhost:3000/api/auth/getUserInfo/${userId}`);
+              const UIresponse = await fetch(`${process.env.BACKEND_URL}/api/auth/getUserInfo/${userId}`);
               if (!UIresponse.ok) {
                   throw new Error('Failed to fetch user info');
               }
@@ -32,7 +32,7 @@ function CareerPage() {
               const jobId = UIdata.currentJob; // Assuming currentJob is in the response
               const jobCategory = UIdata.jobCategory; // Assuming jobCategory is in the response
 
-              const JNresponse = await fetch(`http://localhost:3000/api/career/getJobName/${jobId}`);
+              const JNresponse = await fetch(`${process.env.BACKEND_URL}/api/career/getJobName/${jobId}`);
               if (!JNresponse.ok) {
                   throw new Error('Failed to fetch job name');
               }
@@ -40,7 +40,7 @@ function CareerPage() {
               setUserJob(JNdata.jobName);
               console.log(userJob)
 
-              const response = await fetch(`http://localhost:3000/api/career/getJobPathway/${jobCategory}`);
+              const response = await fetch(`${process.env.BACKEND_URL}/api/career/getJobPathway/${jobCategory}`);
               if (!response.ok) {
                   throw new Error('Failed to fetch career pathway');
               }
@@ -54,7 +54,7 @@ function CareerPage() {
 
       const fetchFeaturedCourse = async () => {
           try {
-              const response = await fetch('http://localhost:3000/api/courses/featured');
+              const response = await fetch(`${process.env.BACKEND_URL}/api/courses/featured`);
               if (!response.ok) {
                   throw new Error('Failed to fetch featured course');
               }
@@ -68,7 +68,7 @@ function CareerPage() {
 
       const fetchRelevantCourses = async () => {
           try {
-              const response = await fetch('http://localhost:3000/api/courses/relevant');
+              const response = await fetch(`${process.env.BACKEND_URL}/api/courses/relevant`);
               if (!response.ok) {
                   throw new Error('Failed to fetch relevant courses');
               }
