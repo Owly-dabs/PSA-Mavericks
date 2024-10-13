@@ -37,7 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/home" />} />
             <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/" />} />
-            <Route path="/courses" element={isAuthenticated ? <CoursesPage /> : <Navigate to="/" />} />
+            {/* <Route path="/courses" element={isAuthenticated ? <CoursesPage /> : <Navigate to="/" />} /> */}
             <Route path="/engagement" element={isAuthenticated ? <EngagementPage /> : <Navigate to="/" />} />
             <Route path="/career" element={isAuthenticated ? <CareerPage /> : <Navigate to="/" />} />
             <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />

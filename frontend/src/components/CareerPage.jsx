@@ -7,6 +7,42 @@ import CoursesCard from './CoursesCard.jsx';
 import CoursesCarousell from './CoursesCarousell.jsx';
 
 function CareerPage() {
+  const [featuredCourse, setFeaturedCourse] = useState(null);
+  const [relevantCourses, setRelevantCourses] = useState([]);
+
+  useEffect(() => {
+      // Fetch featured course
+      const fetchFeaturedCourse = async () => {
+          try {
+              const response = await fetch('http://localhost:3000/api/courses/featured');
+              if (!response.ok) {
+                  throw new Error('Failed to fetch featured course');
+              }
+              const data = await response.json();
+              setFeaturedCourse(data);
+          } catch (error) {
+              console.error("Error fetching featured course:", error);
+          }
+      };
+
+      // Fetch other relevant courses
+      const fetchRelevantCourses = async () => {
+          try {
+              const response = await fetch('http://localhost:3000/api/courses/relevant');
+              if (!response.ok) {
+                  throw new Error('Failed to fetch relevant courses');
+              }
+              const data = await response.json();
+              setRelevantCourses(data);
+          } catch (error) {
+              console.error("Error fetching relevant courses:", error);
+          }
+      };
+
+      fetchFeaturedCourse();
+      fetchRelevantCourses();
+  }, []);
+
     return (
       <Box sx={{ padding: '2em' }}>
         <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold' }}>CAREER 🌱</Typography>
