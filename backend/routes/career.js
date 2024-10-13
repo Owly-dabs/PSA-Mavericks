@@ -82,5 +82,22 @@ router.post('/setCurrentJob', async (req, res) => {
     }
   });
 
+  // Route to get jobs by category
+router.get('/getJobPathway/:category', async (req, res) => {
+    const { category } = req.params;
+  
+    try {
+      // Find jobs by category and sort by years of experience
+      const jobs = await Job.find({ category }).sort({ yearsOfExperience: 1 });
+      if (jobs.length === 0) {
+        return res.status(404).json({ message: 'No jobs found in this category' });
+      }
+  
+      res.status(200).json(jobs);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching jobs' });
+    }
+  });
+
 
 module.exports = router;
