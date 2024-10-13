@@ -132,7 +132,7 @@ router.get('/getJobPathway/:category', async (req, res) => {
 
 
 // Method to get courses filtered by skill level and category
-router.get('/getRecCourses/:skillLevel/:category', async (req, res) => {
+/*router.get('/getRecCourses/:skillLevel/:category', async (req, res) => {
     const { skillLevel, category } = req.params; // Extract query parameters
   
     try {
@@ -150,6 +150,43 @@ router.get('/getRecCourses/:skillLevel/:category', async (req, res) => {
       // Retrieve courses based on filter
       const courses = await Course.find(filter);
       
+      // Return the filtered list of courses
+      res.status(200).json(courses);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching courses' });
+    }
+  });*/
+
+  router.get('/getRecCourses/:userId', async (req, res) => {
+    const { userId } = req.params; // Extract userId from the parameters
+  
+    try {
+      // Find user info for the given userId and populate the currentJob field
+      const userInfo = await UserInfo.findOne({ user: userId }).populate('currentJob'); // Assuming currentJob is a reference to the Job model
+      if (!userInfo) {
+        return res.status(404).json({ message: 'User info not found' });
+      }
+  
+      // Check if the user has a current job
+      if (!userInfo.currentJob) {
+        return res.status(404).json({ message: 'User has no current job' });
+      }
+  
+      // Extract skill level and category from the populated current job
+      const { skillLevel, category } = userInfo.currentJob;
+  
+      // Create a filter object based on skillLevel and category
+      const filter = {};
+      if (skillLevel) {
+        filter.skillLevel = skillLevel; // Add skillLevel to filter
+      }
+      if (category) {
+        filter.category = category; // Add category to filter
+      }
+  
+      // Retrieve courses based on filter
+      const courses = await Course.find(filter);
+  
       // Return the filtered list of courses
       res.status(200).json(courses);
     } catch (error) {
