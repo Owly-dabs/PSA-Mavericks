@@ -9,9 +9,17 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true, // Job description is required
   },
+  yearsOfExperience: {
+    type: Number, 
+    required: true,
+  },
   category: {
     type:String,
     required: true,
+  },
+  skillLevel: {
+    type:String, 
+    required: true,  
   }
 }); 
 
