@@ -126,6 +126,7 @@ function CareerPage() {
           }}>
             <Typography variant="h5" sx={{ marginBottom: '0.5em' }}>{randomCourse.title}</Typography>
             <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.description}</Typography>
+            <Typography variant="body1" sx={{ marginBottom: '1em' }}>{randomCourse.instructor}</Typography>
             <Button size="small" sx={{ width: '100%', marginTop: '1em' }}>Learn More</Button>
           </Box>
           </Box>
