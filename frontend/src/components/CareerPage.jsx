@@ -1,5 +1,5 @@
 // src/components/HomePage.js
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Typography, Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import CareerPathwayTimeline from './CareerPathwayTimeline.jsx';
@@ -9,9 +9,42 @@ import CoursesCarousell from './CoursesCarousell.jsx';
 function CareerPage() {
   const [featuredCourse, setFeaturedCourse] = useState(null);
   const [relevantCourses, setRelevantCourses] = useState([]);
+  const [userJob, setUserJob] = useState("");
+  const [careerPathway, setCareerPathway] = useState([]);
 
   useEffect(() => {
-      // Fetch featured course
+      const userId = sessionStorage.getItem('userId');
+
+      const fetchUserInfo = async () => {
+          try {
+              const UIresponse = await fetch(`http://localhost:3000/api/auth/getUserInfo/${userId}`);
+              if (!UIresponse.ok) {
+                  throw new Error('Failed to fetch user info');
+              }
+              const UIdata = await UIresponse.json();
+              const jobId = UIdata.currentJob; // Assuming currentJob is in the response
+              const jobCategory = UIdata.jobCategory; // Assuming jobCategory is in the response
+
+              const JNresponse = await fetch(`http://localhost:3000/api/career/getJobName/${jobId}`);
+              if (!JNresponse.ok) {
+                  throw new Error('Failed to fetch job name');
+              }
+              const JNdata = await JNresponse.json();
+              setUserJob(JNdata.jobName);
+              console.log(userJob)
+
+              const response = await fetch(`http://localhost:3000/api/career/getJobPathway/${jobCategory}`);
+              if (!response.ok) {
+                  throw new Error('Failed to fetch career pathway');
+              }
+              const data = await response.json();
+              setCareerPathway(data);
+              console.log(careerPathway);
+          } catch (error) {
+              console.error("Error fetching user info:", error);
+          }
+      };
+
       const fetchFeaturedCourse = async () => {
           try {
               const response = await fetch('http://localhost:3000/api/courses/featured');
@@ -20,12 +53,12 @@ function CareerPage() {
               }
               const data = await response.json();
               setFeaturedCourse(data);
+              console.log(featuredCourse);
           } catch (error) {
               console.error("Error fetching featured course:", error);
           }
       };
 
-      // Fetch other relevant courses
       const fetchRelevantCourses = async () => {
           try {
               const response = await fetch('http://localhost:3000/api/courses/relevant');
@@ -34,13 +67,15 @@ function CareerPage() {
               }
               const data = await response.json();
               setRelevantCourses(data);
+              console.log(relevantCourses);
           } catch (error) {
               console.error("Error fetching relevant courses:", error);
           }
       };
 
-      fetchFeaturedCourse();
-      fetchRelevantCourses();
+      fetchUserInfo();
+      // fetchFeaturedCourse();
+      // fetchRelevantCourses();
   }, []);
 
     return (
