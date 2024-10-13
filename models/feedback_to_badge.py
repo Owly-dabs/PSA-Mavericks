@@ -73,3 +73,8 @@ MOCK_FEEDBACK = \
 
 MOCK_RESPONSE = "Badge 1: Effective Communicator\nBadge 2: Problem Solver\nBadge 3: Team Player"
 
+def parse_response_to_list(response):
+    badges = []
+    lines = response.split("\n")
+    for line in lines:
+        badges.append(line.split(": ")[1])
