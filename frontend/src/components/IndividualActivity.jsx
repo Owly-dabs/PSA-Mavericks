@@ -16,6 +16,13 @@ export default function IndividualActivity() {
         const response = await fetch(`http://localhost:3000/api/engagement/getActivity/${id}`);
         const data = await response.json();
         setActivity(data);
+        
+        // Check if the user is already registered for the activity
+        const userId = sessionStorage.getItem('userId');
+        if (userId && data.signedUpUsers.some(user => user._id === userId)) {
+          setIsRegistered(true); // Mark as registered if user ID exists in signedUpUsers
+        }
+        console.log(isRegistered);
       } catch (error) {
         console.error('Error fetching activity:', error);
       }
@@ -64,7 +71,7 @@ export default function IndividualActivity() {
     <Box sx={{ padding: '2em', display: 'flex', gap: '2em', alignItems: 'flex-start' }}>
       {/* Image section */}
       <img
-        src={placeholderimg}
+        src={activity.image}
         style={{
           width: '50vw', // Set the width to 50% of the viewport width
           height: 'auto', // Maintain aspect ratio
