@@ -19,8 +19,9 @@ import profileImage from '../assets/avatar.png'; // Adjust path accordingly
 const pages = [
   // { name: 'Courses', link: '/courses' },
   { name: 'Career', link: '/career' },
+
+  { name: 'Performance', link: '/performance' },
   { name: 'Engagement', link: '/engagement' },
-  { name: 'Performance', link: '/performance' }
 ];
 const settings = ['Logout'];
 
@@ -65,8 +66,8 @@ function NavBar({ onLogout }) {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/home"
+          
+            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

@@ -36,7 +36,7 @@ function App() {
       <Router>
         <div style={{ backgroundColor: isAuthenticated ? '#eff6ff' : 'white', minHeight: '100vh' }}>
           <Routes>
-            <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/home" />} />
+            <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/career" />} />
             <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/" />} />
             {/* <Route path="/courses" element={isAuthenticated ? <CoursesPage /> : <Navigate to="/" />} /> */}
             <Route path="/engagement" element={isAuthenticated ? <EngagementPage /> : <Navigate to="/" />} />
