@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       {isAuthenticated && <NavBar onLogout={handleLogout} />}
-      <Router>
+      
         <div style={{ backgroundColor: isAuthenticated ? '#eff6ff' : 'white', minHeight: '100vh' }}>
           <Routes>
             <Route path="/" element={!isAuthenticated ? <LoginPage onLogin={handleLogin} /> : <Navigate to="/career" />} />
@@ -48,7 +48,7 @@ function App() {
           </Routes>
           {isAuthenticated && <Footer />}  {/* Add the footer here after login */}
         </div>
-      </Router>
+      
     </>
   );
 }

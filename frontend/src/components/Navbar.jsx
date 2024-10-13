@@ -11,15 +11,14 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import HomeIcon from '../assets/cruise.png';  // Assuming HomeIcon is your logo
+import HomeIcon from '../assets/cruise.png'; // Assuming HomeIcon is your logo
+import { Link } from 'react-router-dom';
 
 // Import the local image for the profile
 import profileImage from '../assets/avatar.png'; // Adjust path accordingly
 
 const pages = [
-  // { name: 'Courses', link: '/courses' },
   { name: 'Career', link: '/career' },
-
   { name: 'Performance', link: '/performance' },
   { name: 'Engagement', link: '/engagement' },
 ];
@@ -66,8 +65,6 @@ function NavBar({ onLogout }) {
           <Typography
             variant="h6"
             noWrap
-          
-            
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -111,9 +108,9 @@ function NavBar({ onLogout }) {
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: 'center' }}>
-                    <a href={page.link} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Link to={page.link} style={{ textDecoration: 'none', color: 'inherit' }}>
                       {page.name}
-                    </a>
+                    </Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -122,14 +119,15 @@ function NavBar({ onLogout }) {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page.name}
-                href={page.link} // Link to the page
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.name}
-              </Button>
+                <Button
+                  key={page.name}
+                  component={Link} // Use Link as the component for Button
+                  to={page.link} // Specify the route
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page.name}
+                </Button>
             ))}
           </Box>
 
