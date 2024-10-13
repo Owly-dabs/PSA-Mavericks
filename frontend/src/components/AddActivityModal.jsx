@@ -75,8 +75,7 @@ function AddActivityModal({ open, handleClose }) {
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 4,
-          borderRadius: 2,
-          position: 'relative'
+          borderRadius: 2
         }}
       >
         {/* Close Button */}
