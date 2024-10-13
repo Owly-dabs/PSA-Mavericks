@@ -5,6 +5,7 @@ const UserInfo = require('../models/UserInfo');
 const Job = require('../models/Job');
 const Pathway = require('../models/Pathway'); 
 
+//create job
 router.post('/createJob', async (req, res) => {
     const { title, jobDescription, yearsOfExperience, category, skillLevel } = req.body;
   
@@ -56,6 +57,28 @@ router.post('/setCurrentJob', async (req, res) => {
       res.status(200).json({ message: 'Current job and category updated successfully', userInfo });
     } catch (error) {
       res.status(500).json({ error: 'Error updating current job and category' });
+    }
+  });
+
+  router.get('/currentJob/:userId', async (req, res) => {
+    const { userId } = req.params;
+  
+    try {
+      // Find UserInfo by userId
+      const userInfo = await UserInfo.findOne({ user: userId }).populate('currentJob');
+      if (!userInfo) {
+        return res.status(404).json({ message: 'User info not found' });
+      }
+  
+      // Check if the user has a current job
+      if (!userInfo.currentJob) {
+        return res.status(404).json({ message: 'No current job assigned' });
+      }
+  
+      // Send the user's current job details
+      res.status(200).json({ currentJob: userInfo.currentJob });
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching current job' });
     }
   });
 
