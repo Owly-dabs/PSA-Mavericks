@@ -62,49 +62,59 @@ function PerformancePage() {
 
     return (
         <>
-            <Box sx={{ padding: 2 }}>
-                <Typography variant="h4" gutterBottom>
-                    Performance Overview
-                </Typography>
-
+            <Box sx={{ padding: '2em' }}>
+            <Typography variant='h2' sx={{ display: 'flex', padding: '5px', fontWeight: 'semi-bold', justifyContent:'left' }}>PERFORMANCE 💫</Typography>
+            <Typography variant="h5" sx={{ my: '1em', mx: 1, textAlign: 'left' }}>Your Strengths</Typography>
                 {/* Display achievements in cards */}
-                <Grid container spacing={2} justifyContent="center">
-                    {achievements.map((achievement, index) => (
-                        <Grid item xs={3} key={index} textAlign="center">
+                <Box sx={{backgroundColor:'rgba(255, 255, 255, 0.7)', borderRadius:'20px' }}>
+                  <Grid container spacing={1} justifyContent="center" >
+                      {achievements.map((achievement, index) => (
+                          <Grid item xs={2.5} key={index} textAlign="center">
                             <Card sx={{
-                                 width: 200, height: 300, textAlign: 'center' ,
-                                 transition: 'transform 0.3s, box-shadow 0.3s', // Smooth transition
-                                 '&:hover': {
-                                     transform: 'scale(1.05)', // Slightly increase size on hover
-                                     boxShadow: '0px 10px 20px rgba(0,0,0,0.2)', // Add shadow on hover
-                                 },
-                                 }}>
+                                width: 270, 
+                                height: 270, 
+                                
+                                backgroundColor: 'transparent', 
+                                transition: 'transform 0.3s', // Smooth transition for transform
+                                boxShadow: 'none', // No shadow by default
+                                '&:hover': {
+                                    transform: 'scale(1.05)', // Slightly increase size on hover
+                                    //boxShadow: '0px 10px 20px rgba(0,0,0,0.2)', // Add shadow on hover
+                                },
+                            }}>
                                 <CardMedia
                                     component="img"
                                     src={`/badges/${achievement.icon}`} // Adjusted to your badges directory
                                     alt={achievement.name}
                                     sx={{
                                         height: 200, // Adjust height
-                                        objectFit: 'contain',
+                                        objectFit: 'contain', // Keeps the image's aspect ratio
                                         pt: 2, // Adjust padding
+                                        backgroundColor: 'transparent', // Remove background color
+                                        borderRadius: '0', // Optional: Remove rounded corners if any
                                     }}
                                 />
                                 <CardContent>
                                     <Typography variant="body1">{achievement.name}</Typography>
                                 </CardContent>
                             </Card>
-                        </Grid>
-                    ))}
-                </Grid>
+
+
+                          </Grid>
+                      ))}
+                  </Grid>
+                </Box>
+                
 
                 {/* Display a carousel of feedback from other employees */}
-                <Box sx={{ marginTop: 4 }}>
-                    <Typography variant="h6" gutterBottom>
-                        Employee Feedback
+                <Box sx={{ my: '4em', }}>
+                <Typography variant="h5" sx={{ marginBottom: '1em', mx: 1, textAlign: 'left' }}>
+                        Feedback
                     </Typography>
                     <Carousel {...carouselSettings}>
                         {feedbacks.map((feedback, index) => (
-                            <Box key={index} sx={{ padding: 2 }}>
+                            <Box key={index} >
+                              
                                 <Typography variant="body1">{feedback.feedbackText}</Typography>
                             </Box>
                         ))}

@@ -8,6 +8,7 @@ import EngagementPage from './components/EngagementPage';
 import CareerPage from './components/CareerPage';
 import PerformancePage from './components/PerformancePage';
 import IndividualActivity from './components/IndividualActivity';
+import Footer from './components/Footer';  // Import the Footer component
 
 function App() {
   // Initialize isAuthenticated from localStorage
@@ -43,6 +44,7 @@ function App() {
             <Route path="/performance" element={isAuthenticated ? <PerformancePage /> : <Navigate to="/" />} />
             <Route path="/engagement/:id" element={isAuthenticated ? <IndividualActivity /> : <Navigate to="/" />} />
           </Routes>
+          {isAuthenticated && <Footer />}  {/* Add the footer here after login */}
         </div>
       </Router>
     </>

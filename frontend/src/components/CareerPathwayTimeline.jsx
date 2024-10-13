@@ -9,12 +9,14 @@ const steps = [
   'Select master blaster campaign settings',
   'Create an ad group',
   'Create an ad',
+  'Create an ad',
+  'Create an ad',
 ];
 
 export default function HorizontalLinearAlternativeLabelStepper() {
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={1} alternativeLabel>
+      <Stepper activeStep={3} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>

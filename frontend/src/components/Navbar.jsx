@@ -11,9 +11,10 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import HomeIcon from '../assets/cruise.png'; 
+import HomeIcon from '../assets/cruise.png';  // Assuming HomeIcon is your logo
 
+// Import the local image for the profile
+import profileImage from '../assets/avatar.png'; // Adjust path accordingly
 
 const pages = [
   { name: 'Courses', link: '/courses' },
@@ -21,7 +22,7 @@ const pages = [
   { name: 'Engagement', link: '/engagement' },
   { name: 'Performance', link: '/performance' }
 ];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function NavBar({ onLogout }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -117,26 +118,7 @@ function NavBar({ onLogout }) {
               ))}
             </Menu>
           </Box>
-          
-{/*           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography> */}
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -149,10 +131,12 @@ function NavBar({ onLogout }) {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* Use the imported local profile image */}
+                <Avatar alt="User Avatar" src={profileImage} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -183,4 +167,5 @@ function NavBar({ onLogout }) {
     </AppBar>
   );
 }
+
 export default NavBar;
