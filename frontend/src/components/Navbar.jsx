@@ -17,7 +17,7 @@ import HomeIcon from '../assets/cruise.png';  // Assuming HomeIcon is your logo
 import profileImage from '../assets/avatar.png'; // Adjust path accordingly
 
 const pages = [
-  { name: 'Courses', link: '/courses' },
+  // { name: 'Courses', link: '/courses' },
   { name: 'Career', link: '/career' },
   { name: 'Engagement', link: '/engagement' },
   { name: 'Performance', link: '/performance' }
